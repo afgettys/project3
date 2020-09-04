@@ -3,8 +3,14 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./pages/Home";
 import mybooks from "./pages/mybooks";
 import Nav from "./components/Nav";
+import PasswordReset from "./pages/PasswordReset";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
+
+
 
 function App() {
+
   return (
     <Router>
       <div>
@@ -12,10 +18,12 @@ function App() {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/mybooks" component={mybooks} />
+          <Route exact path="/passwordreset" component={PasswordReset} />
+          <Route exact path="/signin" component={SignIn} />
+          <Route exact path="/signup" component={SignUp} />
         </Switch>
       </div>
     </Router>
-  );
-}
+  );}
 
 export default App;
