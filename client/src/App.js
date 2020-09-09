@@ -6,6 +6,8 @@ import Nav from "./components/Nav";
 import PasswordReset from "./pages/PasswordReset";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
+import discussion from "./pages/discussion";
+
 
 
 
@@ -21,6 +23,7 @@ function App() {
           <Route exact path="/passwordreset" component={PasswordReset} />
           <Route exact path="/signin" component={SignIn} />
           <Route exact path="/signup" component={SignUp} />
+          <Route exact path="/discussion" component={discussion} />
         </Switch>
       </div>
     </Router>
