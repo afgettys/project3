@@ -32,10 +32,23 @@ class Nav extends Component {
   }
 
   render() {
+    // If i am logged out, show only these nav points
+    let user
+    let loggedIn = false
+    try {
+      const user = localStorage.getItem('user')
+      const profile = JSON.parse(user)
+      if (profile.user) {
+        loggedIn = true
+      }
+    } catch (e) {}
+
+    console.log('loggedin', loggedIn)
+
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light mb-2">
         <Link className="navbar-brand" to="/">
-        <img src= {Logo} alt="logo"/>
+          <img src= {Logo} alt="logo"/>
         </Link>
         <button
           onClick={this.toggleNav}
@@ -51,13 +64,6 @@ class Nav extends Component {
         <div className={`${this.state.open ? "" : "collapse "}navbar-collapse`} id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item">
-            <Link
-                onClick={this.toggleNav}
-                className={window.location.pathname === "/signin" ? "nav-link active" : "nav-link"}
-                to="/signin"
-              >
-                Sign In
-              </Link>
               <Link
                 onClick={this.toggleNav}
                 className={window.location.pathname === "/" ? "nav-link active" : "nav-link"}
@@ -66,24 +72,57 @@ class Nav extends Component {
                 Home
               </Link>
             </li>
-            <li className="nav-item">
-              <Link
-                onClick={this.toggleNav}
-                className={window.location.pathname === "/mybooks" ? "nav-link active" : "nav-link"}
-                to="/mybooks"
-              >
-                My books
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link
-                onClick={this.toggleNav}
-                className={window.location.pathname === "/discussion" ? "nav-link active" : "nav-link"}
-                to="/discussion"
-              >
-                Discusion
-              </Link>
-              </li>
+              {
+                loggedIn && (
+                  <li className="nav-item">
+                    <Link
+                      onClick={this.toggleNav}
+                      className={window.location.pathname === "/mybooks" ? "nav-link active" : "nav-link"}
+                      to="/mybooks"
+                    >
+                      My Books
+                    </Link>
+                  </li>
+                )
+              }
+            {
+              loggedIn && (
+                <li className="nav-item">
+                  <Link
+                    onClick={this.toggleNav}
+                    className={window.location.pathname === "/discussion" ? "nav-link active" : "nav-link"}
+                    to="/discussion"
+                  >
+                    Discusion
+                  </Link>
+                </li>
+              )
+            }
+            {
+              loggedIn ?
+                <li className="nav-item">
+                  <Link
+                    onClick={() => {
+                      localStorage.removeItem('user')
+                    }}
+                    className={"nav-link active"}
+                    to="/signin"
+                  >
+                    Sign Out
+                  </Link>
+                </li>
+                  :
+                (
+                <li className="nav-item">
+                  <Link
+                    onClick={this.toggleNav}
+                    className={window.location.pathname === "/signin" ? "nav-link active" : "nav-link"}
+                    to="/signin">
+                    Sign In
+                  </Link>
+                </li>
+              )
+            }
           </ul>
         </div>
       </nav>
