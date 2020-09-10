@@ -8,10 +8,7 @@ import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import discussion from "./pages/discussion";
 
-
-
-
-function App() {
+function App () {
 
   return (
     <Router>
