@@ -13,6 +13,7 @@ const SignIn = () => {
     auth.signInWithEmailAndPassword(email, password).then((userCredential) => {
       // Set the state
       localStorage.setItem('user', JSON.stringify(userCredential, null, 2))
+      window.location.href = window.location.origin + "/"
     }).catch((error) => {
       // User login unsuccessful
       setError("Error signing in with password and email!");
