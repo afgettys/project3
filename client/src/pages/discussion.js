@@ -15,8 +15,19 @@ class discussion extends Component {
   state = {
     bookTitle: '',
     headline: '',
-    review: ''
+    review: '',
+    discussions: []
   };
+
+  componentDidMount() {
+    axios.get('http://localhost:3001/api/discussion').then((response) => {
+      this.setState({
+        discussions: response.data
+      })
+    }).catch((e) => {
+
+    })
+  }
 
   render () {
 
@@ -74,28 +85,23 @@ class discussion extends Component {
                 <img width={1680} height={50} src="assets/reviews.png" frameBorder={0} allowFullScreen />
               </figure>
               <br />
-              <article className="media">
-                <div className="media-content">
-                  <div className="content">
-                    <p>
-                      <strong>Book Title</strong> <small>Headline</small>
-                      <br />
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.
-                    </p>
-                  </div>
-                </div>
-              </article>
-              <article className="media">
-                <div className="media-content">
-                  <div className="content">
-                    <p>
-                      <strong>Book Title</strong> <small>Headline</small>
-                      <br />
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.
-                    </p>
-                  </div>
-                </div>
-              </article>
+              {
+                this.state.discussions.map(({bookTitle, headline, review}) => {
+                  return (
+                    <article className="media">
+                      <div className="media-content">
+                        <div className="content">
+                          <p>
+                            <strong>{bookTitle}</strong> <small>{headline}</small>
+                            <br />
+                            {review}
+                          </p>
+                        </div>
+                      </div>
+                    </article>
+                  )
+                })
+              }
             </div>
           </div></div></div>
     );
