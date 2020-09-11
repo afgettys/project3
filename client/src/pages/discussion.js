@@ -8,13 +8,26 @@ import API from "../utils/API";
 import { Col, Row, Container } from "../components/Grid";
 import { List } from "../components/List";
 import comment from '../components/img/comment.png';
+import axios from 'axios'
+
 
 class discussion extends Component {
   state = {
     bookTitle: '',
     headline: '',
-    review: ''
+    review: '',
+    discussions: []
   };
+
+  componentDidMount() {
+    axios.get('http://localhost:3001/api/discussion').then((response) => {
+      this.setState({
+        discussions: response.data
+      })
+    }).catch((e) => {
+
+    })
+  }
 
   render () {
 
@@ -30,7 +43,7 @@ class discussion extends Component {
             <label className="label">Book Title</label>
             <div className="control">
               <input className="input is-primary" type="text" placeholder="Book name" onChange={(e) => {
-                this.setState({bookTile: e.currentTarget.value})
+                this.setState({bookTitle: e.currentTarget.value})
               }} />
             </div>
           </div>
@@ -53,7 +66,16 @@ class discussion extends Component {
                   <button className="button is-warning" onClick={() => {
                     // axios.post
                     // here we do a POST to /api/reviews with the data of this.state
-                    debugger
+                    const payload = {
+                      bookTitle: this.state.bookTitle,
+                      headline: this.state.headline,
+                      review: this.state.review
+                    }
+                    axios.post('http://localhost:3001/api/discussion', payload).then((d) => {
+                      console.log(d)
+                    }).catch((e) => {
+                      console.log(e)
+                    })
                   }}>Post</button>
                 </div>
               </div>
@@ -63,28 +85,23 @@ class discussion extends Component {
                 <img width={1680} height={50} src="assets/reviews.png" frameBorder={0} allowFullScreen />
               </figure>
               <br />
-              <article className="media">
-                <div className="media-content">
-                  <div className="content">
-                    <p>
-                      <strong>Book Title</strong> <small>Headline</small>
-                      <br />
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.
-                    </p>
-                  </div>
-                </div>
-              </article>
-              <article className="media">
-                <div className="media-content">
-                  <div className="content">
-                    <p>
-                      <strong>Book Title</strong> <small>Headline</small>
-                      <br />
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.
-                    </p>
-                  </div>
-                </div>
-              </article>
+              {
+                this.state.discussions.map(({bookTitle, headline, review}) => {
+                  return (
+                    <article className="media">
+                      <div className="media-content">
+                        <div className="content">
+                          <p>
+                            <strong>{bookTitle}</strong> <small>{headline}</small>
+                            <br />
+                            {review}
+                          </p>
+                        </div>
+                      </div>
+                    </article>
+                  )
+                })
+              }
             </div>
           </div></div></div>
     );
