@@ -9,7 +9,6 @@ import SignUp from "./pages/SignUp";
 import discussion from "./pages/discussion";
 
 function App () {
-
   return (
     <Router>
       <div>
