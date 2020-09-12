@@ -107,7 +107,7 @@ class Nav extends Component {
                   }
                   to="/discussion"
                 >
-                  Discusion
+                  Discussion
                 </Link>
               </li>
             )}

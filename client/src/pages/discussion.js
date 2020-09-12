@@ -19,6 +19,9 @@ class discussion extends Component {
   };
 
   componentDidMount() {
+    this.getData();
+  }
+  getData(){
     axios
       .get("/api/discussion")
       .then((response) => {
@@ -28,6 +31,15 @@ class discussion extends Component {
       })
       .catch((e) => {});
   }
+
+  clearForm(){
+    this.setState({
+      bookTitle: "",
+      headline: "",
+      review: "",
+    })
+  }
+
 
   render() {
     return (
@@ -54,6 +66,7 @@ class discussion extends Component {
                 className="input is-primary"
                 type="text"
                 placeholder="Book name"
+                value = {this.state.bookTitle}
                 onChange={(e) => {
                   this.setState({ bookTitle: e.currentTarget.value });
                 }}
@@ -67,6 +80,7 @@ class discussion extends Component {
                 className="input is-primary"
                 type="text"
                 placeholder="Review Title"
+                value = {this.state.headline}
                 onChange={(e) => {
                   this.setState({ headline: e.currentTarget.value });
                 }}
@@ -79,6 +93,7 @@ class discussion extends Component {
                     style={{ width: "60%" }}
                     placeholder="What did you like or dislike?"
                     defaultValue={""}
+                    value = {this.state.review}
                     onChange={(e) => {
                       this.setState({ review: e.currentTarget.value });
                     }}
@@ -100,7 +115,8 @@ class discussion extends Component {
                       axios
                         .post("/api/discussion", payload)
                         .then((d) => {
-                          window.location.reload();
+                          this.clearForm();
+                          this.getData();
                         })
                         .catch((e) => {
                           console.log(e);
@@ -142,7 +158,7 @@ class discussion extends Component {
                               axios
                                 .delete("/api/discussion/" + _id)
                                 .then((d) => {
-                                  window.location.reload();
+                                  this.getData();
                                 })
                                 .catch((e) => {
                                   console.log(e);
