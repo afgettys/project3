@@ -35,12 +35,12 @@ const PasswordReset = () => {
       <div className="border border-blue-300 mx-auto w-11/12 md:w-2/4 rounded py-8 px-4 md:px-8">
         <form action="">
           {emailHasBeenSent && (
-            <div className="py-3 bg-green-400 w-full text-white text-center mb-3">
+            <div className="py-3 bg-green-400 w-full text-black text-center mb-3">
               An email has been sent to you!
             </div>
           )}
           {error !== null && (
-            <div className="py-3 bg-red-600 w-full text-white text-center mb-3">
+            <div className="py-3 bg-red-600 w-full text-black text-center mb-3">
               {error}
             </div>
           )}
