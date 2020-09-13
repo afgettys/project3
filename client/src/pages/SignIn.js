@@ -87,7 +87,7 @@ const SignIn = () => {
             </div>
           </div>
             <div class="col-md-auto">
-              <Link to="signUp" className="btn" id="link"> Sign up here </Link>{" "}
+              <Link to="signUp" className="btn" id="link"> Create an Account </Link>{" "}
             </div>
         </div>
         <br/>          
@@ -96,8 +96,6 @@ const SignIn = () => {
           <Link to="passwordReset" className="text" id="text"> Forgot Password? </Link>{" "}
           </div>
           </div>  
-          
-        {/* </p> */}
       </div>
     </div>
     </Container>

@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { Col, Row, Container } from "../components/Grid";
+import Join from "../components/Join"
 import { auth, signInWithGoogle, generateUserDocument } from "../utils/firebase";
+import "./style.css";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -36,74 +39,62 @@ const SignUp = () => {
   };
 
   return (
+    <Container>
+      <Join>
+
+      </Join>
     <div className="mt-8">
-      <h1 className="text-3xl mb-2 text-center font-bold">Sign Up</h1>
-      <div className="border border-blue-400 mx-auto w-11/12 md:w-2/4 rounded py-8 px-4 md:px-8">
-        {error !== null && (
-          <div className="py-4 bg-red-600 w-full text-black text-center mb-3">
-            {error}
-          </div>
-        )}
-        <form className="">
-          <label htmlFor="displayName" className="block">
-            Display Name:
-          </label>
+      <div className="card-body">
+        {error !== null && ( <div className="py-4 bg-red-600 w-full text-black text-center mb-3"> {error} </div> )}
+        <form>
+          <div className="form-group">
+          <label htmlFor="displayName"> User Name </label>
           <input
             type="text"
-            className="my-1 p-1 w-full "
+            className="form-control"
             name="displayName"
             value={displayName}
-            placeholder="E.g: Faruq"
+            placeholder="Display Name"
             id="displayName"
             onChange={event => onChangeHandler(event)}
           />
-          <label htmlFor="userEmail" className="block">
-            Email:
-          </label>
+          <label htmlFor="userEmail" className="block"> Email </label>
           <input
             type="email"
-            className="my-1 p-1 w-full"
+            className="form-control"
             name="userEmail"
             value={email}
-            placeholder="E.g: faruq123@gmail.com"
+            placeholder="Your Email"
             id="userEmail"
             onChange={event => onChangeHandler(event)}
           />
-          <label htmlFor="userPassword" className="block">
-            Password:
-          </label>
+          <label htmlFor="userPassword" className="block"> Password </label>
           <input
             type="password"
-            className="mt-1 mb-3 p-1 w-full"
+            className="form-control"
             name="userPassword"
             value={password}
             placeholder="Your Password"
             id="userPassword"
             onChange={event => onChangeHandler(event)}
           />
-          <button
-            className="bg-green-400 hover:bg-green-500 w-full py-2 text-black"
-            onClick={event => {
-              createUserWithEmailAndPasswordHandler(event, email, password);
-            }}
-          >
-            Sign up
+          <br/>
+
+          <div class="d-flex justify-content-center">
+          <button className="btn" onClick={event => { createUserWithEmailAndPasswordHandler(event, email, password); }} >
+            Join
           </button>
+          </div>
+          </div>  
         </form>
-        <p className="text-center my-3">or</p>
-        <button
-          onClick={() => {
-            try {
-              signInWithGoogle();
-            } catch (error) {
-              console.error("Error signing in with Google", error);
-            }
-          }}
-          className="bg-red-500 hover:bg-red-600 w-full py-2 text-black"
-        >
+        <p className="text-center my-3" id="text-or">or</p>
+        <div class="d-flex justify-content-center">
+        <button onClick={() => { try { signInWithGoogle(); } catch (error) { console.error("Error signing in with Google", error); } }}
+          className="btn" id="btn-goo" >
           Sign In with Google
         </button>
-        <p className="text-center my-3">
+        </div>
+        <p className="text-center my-3" id="text">
           Already have an account?{" "}
           <Link to="/" className="text-blue-500 hover:text-blue-600">
             Sign in here
@@ -111,6 +102,7 @@ const SignUp = () => {
         </p>
       </div>
     </div>
+    </Container>
   );
 };
 
