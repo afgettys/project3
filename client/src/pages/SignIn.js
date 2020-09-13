@@ -1,6 +1,10 @@
 import React, {useState} from "react";
 import { Link } from "react-router-dom";
 import { signInWithGoogle, auth } from "../utils/firebase";
+import { Col, Row, Container } from "../components/Grid";
+import Header from "../components/Header"
+import Log from "../components/Log"
+import "./style.css";
 
 const SignIn = () => {
 
@@ -34,60 +38,69 @@ const SignIn = () => {
 
 
   return (
+    <Container>
+      <Header>
+
+      </Header>
     <div className="mt-8">
-      <h1 className="text-3xl mb-2 text-center font-bold">Sign In</h1>
-      <div className="border border-blue-400 mx-auto w-11/12 md:w-2/4 rounded py-8 px-4 md:px-8">
+      <div className="card-body">
         {error !== null && <div className = "py-4 bg-red-600 w-full text-white text-center mb-3">{error}</div>}
-        <form className="">
-          <label htmlFor="userEmail" className="block">
-            Email:
-          </label>
+        <form>
+        <div className="form-group">
+          <label htmlFor="userEmail"> Email </label>
           <input
             type="email"
-            className="my-1 p-1 w-full"
+            className="form-control"
             name="userEmail"
             value = {email}
-            placeholder="E.g: faruq123@gmail.com"
+            placeholder="Your Email"
             id="userEmail"
             onChange = {(event) => onChangeHandler(event)}
           />
-          <label htmlFor="userPassword" className="block">
-            Password:
-          </label>
+          <br/>
+          <label htmlFor="userPassword" className="block"> Password </label>
           <input
             type="password"
-            className="mt-1 mb-3 p-1 w-full"
+            className="form-control"
             name="userPassword"
             value = {password}
             placeholder="Your Password"
             id="userPassword"
             onChange = {(event) => onChangeHandler(event)}
           />
-          <button className="bg-green-400 hover:bg-green-500 w-full py-2 text-black" onClick = {(event) => {signInWithEmailAndPasswordHandler(event, email, password)}}>
+          <br/>
+          <div class="d-flex justify-content-center">
+          <button className="btn justify-content-center" onClick = {(event) => {signInWithEmailAndPasswordHandler(event, email, password)}}>
             Sign in
           </button>
+          </div>
+        </div>
         </form>
-        <p className="text-center my-3">or</p>
-        <button
-          className="bg-red-500 hover:bg-red-600 w-full py-2 text-black"
-          onClick={() => {
-            signInWithGoogle();
-          }}
-        >
-          Sign in with Google
-        </button>
-        <p className="text-center my-3">
-          Don't have an account?{" "}
-          <Link to="signUp" className="text-blue-500 hover:text-blue-600">
-            Sign up here
-          </Link>{" "}
-          <br />{" "}
-          <Link to="passwordReset" className="text-blue-500 hover:text-blue-600">
-            Forgot Password?
-          </Link>
-        </p>
+
+        <Log>
+
+        </Log> 
+        < div class="row justify-content-center">
+          <div class="col-md-auto">
+            <div class="">
+              <button className="btn" onClick={() => { signInWithGoogle(); }} > Sign in with Google </button>
+            </div>
+          </div>
+            <div class="col-md-auto">
+              <Link to="signUp" className="btn" id="link"> Sign up here </Link>{" "}
+            </div>
+        </div>
+        <br/>          
+        < div class="row">
+          <div class="col d-flex justify-content-center">
+          <Link to="passwordReset" className="text" id="text"> Forgot Password? </Link>{" "}
+          </div>
+          </div>  
+          
+        {/* </p> */}
       </div>
     </div>
+    </Container>
   );
 };
 

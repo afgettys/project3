@@ -48,7 +48,7 @@ class Nav extends Component {
     //console.log('loggedin', loggedIn)
 
     return (
-      <nav className="navbar navbar-expand-lg navbar-light bg-light mb-2">
+      <nav className="navbar navbar-expand-lg">
         <Link className="navbar-brand" to="/">
           <img src={Logo} alt="logo" />
         </Link>
@@ -63,77 +63,34 @@ class Nav extends Component {
         >
           <span className="navbar-toggler-icon" />
         </button>
-        <div
-          className={`${this.state.open ? "" : "collapse "}navbar-collapse`}
-          id="navbarNav"
-        >
-          <ul className="navbar-nav">
-            <li className="nav-item">
-              <Link
-                onClick={this.toggleNav}
-                className={
-                  window.location.pathname === "/"
-                    ? "nav-link active"
-                    : "nav-link"
-                }
-                to="/"
-              >
+        <div className={`${this.state.open ? "" : "collapse "}navbar-collapse`} id="navbarNav" >
+          <ul className="navbar-nav"> <li className="nav-item"> <Link onClick={this.toggleNav} className={ window.location.pathname === "/" ? "nav-link active" : "nav-link"} to="/" >
                 Home
               </Link>
             </li>
             {loggedIn && (
               <li className="nav-item">
-                <Link
-                  onClick={this.toggleNav}
-                  className={
-                    window.location.pathname === "/mybooks"
-                      ? "nav-link active"
-                      : "nav-link"
-                  }
-                  to="/mybooks"
-                >
+                <Link onClick={this.toggleNav} className={ window.location.pathname === "/mybooks" ? "nav-link active" : "nav-link" } to="/mybooks" >
                   My Books
                 </Link>
               </li>
             )}
             {loggedIn && (
               <li className="nav-item">
-                <Link
-                  onClick={this.toggleNav}
-                  className={
-                    window.location.pathname === "/discussion"
-                      ? "nav-link active"
-                      : "nav-link"
-                  }
-                  to="/discussion"
-                >
+                <Link onClick={this.toggleNav} className={ window.location.pathname === "/discussion" ? "nav-link active" : "nav-link" } to="/discussion" >
                   Discussion
                 </Link>
               </li>
             )}
             {loggedIn ? (
               <li className="nav-item">
-                <Link
-                  onClick={() => {
-                    localStorage.removeItem("user");
-                  }}
-                  className={"nav-link active"}
-                  to="/signin"
-                >
+                <Link onClick={() => { localStorage.removeItem("user"); }} className={"nav-link active"} to="/signin" >
                   Sign Out
                 </Link>
               </li>
             ) : (
               <li className="nav-item">
-                <Link
-                  onClick={this.toggleNav}
-                  className={
-                    window.location.pathname === "/signin"
-                      ? "nav-link active"
-                      : "nav-link"
-                  }
-                  to="/signin"
-                >
+                <Link onClick={this.toggleNav} className={ window.location.pathname === "/signin" ? "nav-link active" : "nav-link" } to="/signin" >
                   Sign In
                 </Link>
               </li>
