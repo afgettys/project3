@@ -9,6 +9,8 @@ import { Col, Row, Container } from "../components/Grid";
 import { List } from "../components/List";
 import comment from "../components/img/comment.png";
 import axios from "axios";
+import Discuss from "../components/Discuss";
+import "./style.css";
 
 class discussion extends Component {
   state = {
@@ -43,67 +45,47 @@ class discussion extends Component {
 
   render() {
     return (
-      <div>
-        <figure className="image">
-          <img
-            width={1680}
-            height={300}
-            src={comment}
-            frameBorder={0}
-            allowFullScreen
-          />
-        </figure>
-        <br />
-
-        <div
-          className="container"
-          style={{ paddingLeft: "200px", paddingRight: "200px" }}
-        >
-          <div className="field">
-            <label className="label">Book Title</label>
-            <div className="control">
+      <Container>
+        <Discuss>  
+        </Discuss>
+        <div class="card-body">
+            <div className="form-group">
+            <label className="label" id="discuss">Book Title</label>
               <input
-                className="input is-primary"
+                className="form-control"
                 type="text"
                 placeholder="Book name"
                 value = {this.state.bookTitle}
                 onChange={(e) => {
-                  this.setState({ bookTitle: e.currentTarget.value });
-                }}
-              />
-            </div>
-          </div>
-          <div className="field">
-            <label className="label">Headline</label>
-            <div className="control">
+                  this.setState({ bookTitle: e.currentTarget.value }); }}  />
+            <br/>
+            <label className="label" id="discuss">Headline</label>
               <input
-                className="input is-primary"
+                className="form-control"
                 type="text"
                 placeholder="Review Title"
                 value = {this.state.headline}
                 onChange={(e) => {
-                  this.setState({ headline: e.currentTarget.value });
-                }}
-              />
-              <div className="field">
-                <label className="label">Review</label>
-                <div className="control">
+                  this.setState({ headline: e.currentTarget.value }); }} />
+
+            <br/>
+                <label className="label" id="discuss">Review</label>
                   <textarea
-                    className="textarea is-primary"
-                    style={{ width: "60%" }}
+                    id="review"
+                    className="form-control"
+                    rows="2"
+                    // style={{ width: "60%" }}
                     placeholder="What did you like or dislike?"
                     defaultValue={""}
                     value = {this.state.review}
                     onChange={(e) => {
-                      this.setState({ review: e.currentTarget.value });
-                    }}
-                  />
-                </div>
-              </div>
+                      this.setState({ review: e.currentTarget.value }); }} />
+              <br/>
               <div className="field is-grouped">
                 <div className="control">
                   <button
-                    className="button is-warning"
+                    className="btn"
+                    id="post"
                     onClick={() => {
                       // axios.post
                       // here we do a POST to /api/reviews with the data of this.state
@@ -128,8 +110,7 @@ class discussion extends Component {
                 </div>
               </div>
               <br />
-
-              <figure className="image">
+              {/* <figure className="image">
                 <img
                   width={1680}
                   height={50}
@@ -137,7 +118,7 @@ class discussion extends Component {
                   frameBorder={0}
                   allowFullScreen
                 />
-              </figure>
+              </figure> */}
               <br />
               {this.state.discussions.map(
                 ({ _id, bookTitle, headline, review }) => {
@@ -161,10 +142,7 @@ class discussion extends Component {
                                   this.getData();
                                 })
                                 .catch((e) => {
-                                  console.log(e);
-                                });
-                            }}
-                          >
+                                  console.log(e); }); }} >
                             Delete
                           </button>
                         </div>
@@ -174,9 +152,8 @@ class discussion extends Component {
                 }
               )}
             </div>
-          </div>
-        </div>
-      </div>
+            </div>
+      </Container>
     );
   }
 }

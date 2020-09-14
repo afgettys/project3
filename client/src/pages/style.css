@@ -17,6 +17,10 @@ label {
   color: white;
 }
 
+#post {
+  background-color: #242C42;
+  color: white;
+}
 #link {
   color: white;
 }
@@ -36,4 +40,13 @@ label {
   font-style: normal;
   color: #242C42;
 }
+
+#discuss {
+  font-size: 30px;
+  font-family: flegrei, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: #EF444E;
+}
+
 

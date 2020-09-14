@@ -6,6 +6,7 @@ import Footer from "../components/Footer";
 import API from "../utils/API";
 import { Col, Row, Container } from "../components/Grid";
 import { List } from "../components/List";
+import MyBooks from "../components/MyBooks";
 
 class Saved extends Component {
   state = {
@@ -35,13 +36,13 @@ class Saved extends Component {
       <Container>
         <Row>
           <Col size="md-12">
-            <Jumbotron>
-            </Jumbotron>
+            <MyBooks>
+            </MyBooks>
           </Col>
         </Row>
         <Row>
           <Col size="md-12">
-            <Card title="Saved Books" icon="download">
+            <Card title="Books Saved">
               {this.state.books.length ? (
                 <List>
                   {this.state.books.map(book => (
@@ -56,7 +57,7 @@ class Saved extends Component {
                       Button={() => (
                         <button
                           onClick={() => this.handleBookDelete(book._id)}
-                          className="btn btn-danger ml-2"
+                          className="btn ml-2"
                         >
                           Delete
                         </button>
