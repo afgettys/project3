@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { auth } from "../utils/firebase";
 import { Link } from "react-router-dom";
+import { Col, Row, Container } from "../components/Grid";
+import "./style.css"; 
 
 const PasswordReset = () => {
   const [email, setEmail] = useState("");
@@ -28,11 +30,13 @@ const PasswordReset = () => {
       });
   };
   return (
-    <div className="mt-8">
-      <h1 className="text-xl text-center font-bold mb-3">
-        Reset your Password
+    <Container>
+
+    <div className="card-body">
+      <h1 className="text-xl text-center font-bold mb-3" id="reset">
+        Forgot your Password?
       </h1>
-      <div className="border border-blue-300 mx-auto w-11/12 md:w-2/4 rounded py-8 px-4 md:px-8">
+      <div className="form-control">
         <form action="">
           {emailHasBeenSent && (
             <div className="py-3 bg-green-400 w-full text-black text-center mb-3">
@@ -45,35 +49,45 @@ const PasswordReset = () => {
             </div>
           )}
           <label htmlFor="userEmail" className="w-full block">
-            Email:
+            Email
           </label>
           <input
             type="email"
             name="userEmail"
             id="userEmail"
             value={email}
-            placeholder="Input your email"
+            placeholder="Enter your Email and we will send you a link to reset your password"
             onChange={onChangeHandler}
-            className="mb-3 w-full px-1 py-2"
+            className="form-control"
           />
+          <br/>
+          <div class="d-flex justify-content-center">      
           <button
-            className="w-full bg-blue-400 text-white py-3"
+            className="btn"
+            // id="post"
             onClick={event => {
               sendResetEmail(event);
             }}
           >
             Send me a reset link
           </button>
+          </div>
         </form>
-
+        <br/>
+    <div class="row">
+      <div class="col d-flex justify-content-center">
         <Link
           to="/"
-          className="my-2 text-blue-700 hover:text-blue-800 text-center block"
+          className="text"
+          id="text"
         >
           &larr; back to sign in page
         </Link>
+        </div>
+        </div>
       </div>
     </div>
+    </Container>
   );
 };
 
